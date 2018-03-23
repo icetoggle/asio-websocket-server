@@ -1,0 +1,3 @@
+﻿  Message.cpp
+c:\users\administrator\documents\asio-websocket-server\public\message.cpp(70): warning C4244: “=”: 从“unsigned __int64”转换到“unsigned char”，可能丢失数据
+  public.vcxproj -> C:\Users\Administrator\Documents\asio-websocket-server\x64\Debug\public.lib
