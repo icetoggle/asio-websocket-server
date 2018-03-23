@@ -1,7 +1,7 @@
 #include "Session.h"
 #include "Server.h"
 #include <iostream>
-#include <boost/uuid/detail/sha1.hpp>
+#include <boost/uuid/sha1.hpp>
 #include "boost/archive/iterators/base64_from_binary.hpp"
 #include "boost/archive/iterators/transform_width.hpp"
 
