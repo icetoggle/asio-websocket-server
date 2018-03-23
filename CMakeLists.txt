@@ -1,5 +1,7 @@
 cmake_minimum_required (VERSION 2.8)
 
+add_definitions(-std=c++11)
+
 project (test_server)
 
 include_directories(../boost_lib/include/)
