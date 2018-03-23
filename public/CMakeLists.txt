@@ -1,9 +1,5 @@
 cmake_minimum_required (VERSION 2.8)
 
-project (test_server)
+aux_source_directory(. DIR_LIB_SRCS)
 
-aux_source_directory(./test_server DIR_SRCS)
-
-add_subdirectory(./public)
-
-add_executable(test_server ${DIR_SRCS})
+add_library(public ${DIR_LIB_SRCS})

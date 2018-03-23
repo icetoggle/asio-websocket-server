@@ -1,5 +1,13 @@
 cmake_minimum_required (VERSION 2.8)
 
-aux_source_directory(. DIR_LIB_SRCS)
+project (test_server)
 
-add_library(public ${DIR_LIB_SRCS})
+include_directories(../boost_lib/include/)
+
+link_directories(../boost_lib/lib/)
+
+aux_source_directory(./test_server DIR_SRCS)
+
+add_subdirectory(./public)
+
+add_executable(test_server ${DIR_SRCS})
