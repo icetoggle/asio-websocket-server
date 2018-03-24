@@ -1,0 +1,8 @@
+/Debug/
+/public/Debug/
+/public/x64/
+/test_server/Debug/
+/test_server/x64/
+/x64/
+*.db
+*.opendb
