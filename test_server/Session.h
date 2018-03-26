@@ -32,6 +32,8 @@ private:
 	Message _readMsg;
 	Message _writeMsg;
 
+	bool _isHand;
+
 	RequestParser _shakeHandParser;
 	char _shakeHandMsg[SHAKE_HAND_MAX_LENGTH];
 	std::string _shakeResp;

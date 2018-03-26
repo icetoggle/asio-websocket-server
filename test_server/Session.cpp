@@ -17,7 +17,7 @@ static std::string encode64(const std::vector<unsigned char> &val) {
 	return os.str().append((3 - val.size() % 3) % 3, '=');
 }
 
-Session::Session(boost::asio::ip::tcp::socket & socket, Server & server) :_server(server), _socket(std::move(socket))
+Session::Session(boost::asio::ip::tcp::socket & socket, Server & server) :_server(server), _socket(std::move(socket)), _isHand(false)
 {
 }
 
@@ -82,6 +82,7 @@ void Session::do_hand_shake()
 				}
 				else
 				{
+					_isHand = true;
 					do_read_header();
 				}
 			});
@@ -170,6 +171,10 @@ void Session::do_read_body()
 
 void Session::diliver(const std::string & msg)
 {
+	if (!_isHand)
+	{
+		return;
+	}
 	_writeMsg.set_body_size(msg.size());
 	_writeMsg.encode_header();
 	memcpy(_writeMsg.body(), msg.c_str(), msg.size());
@@ -182,6 +187,8 @@ void Session::diliver(const std::string & msg)
 		else
 		{
 			std::cout << "write error!!" << std::endl;
+			_socket.close();
+			_server.leave(shared_from_this());
 		}
 	});
 }
