@@ -4,14 +4,17 @@ add_definitions(-std=c++11)
 
 project (test_server)
 
-include_directories(../boost_lib/include/)
+include_directories(/usr/local/include/)
 
 include_directories(./public/)
 
-link_directories(../boost_lib/lib/)
+link_directories("/usr/local/lib/")
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/public/)
 
 aux_source_directory(./test_server DIR_SRCS)
 
 add_subdirectory(./public)
 
-add_executable(test_server ${DIR_SRCS})
+add_executable(testServer ${DIR_SRCS})
+
+target_link_libraries(testServer public boost_system boost_thread pthread)

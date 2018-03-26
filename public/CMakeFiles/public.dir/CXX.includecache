@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ice/asio-websocket-server/public/Message.cpp
+Message.h
+/home/ice/asio-websocket-server/public/Message.h
+cstring
+-
+assert.h
+-
+iostream
+-
+
+/home/ice/asio-websocket-server/public/Message.h
+string
+-
+
