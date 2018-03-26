@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/test_server.dir/test_server/Session.cpp.o CMakeFiles/test_server.dir/test_server/Server.cpp.o CMakeFiles/test_server.dir/test_server/RequestParser.cpp.o CMakeFiles/test_server.dir/test_server/main.cpp.o  -o test_server  -L/usr/local/lib -rdynamic 

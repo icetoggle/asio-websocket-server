@@ -1,0 +1,2 @@
+/home/ice/asio-websocket-server/public/CMakeFiles/public.dir
+/home/ice/asio-websocket-server/CMakeFiles/testServer.dir
