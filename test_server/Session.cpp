@@ -158,7 +158,7 @@ void Session::do_read_body()
 		{
 			_readMsg.decode_body();
 			std::string msg((char *)_readMsg.body(), _readMsg.get_body_size());
-			_server.diliver(msg);
+			diliver(msg);
 			do_read_header();
 		}
 		else

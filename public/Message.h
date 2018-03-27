@@ -8,7 +8,7 @@ public:
 	enum
 	{
 		HEADER_LENGTH = 2,
-		MAX_BODY_LENGTH = 0xffffff,
+		MAX_BODY_LENGTH = 0xffff,
 		MASKING_LENGTH = 4,
 	};
 
