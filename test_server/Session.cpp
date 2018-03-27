@@ -93,6 +93,7 @@ void Session::do_hand_shake()
 
 void Session::do_read_header()
 {
+	_readMsg.checkResize(Message::HEADER_LENGTH);
 	boost::asio::async_read(_socket, boost::asio::buffer(_readMsg.data(), Message::HEADER_LENGTH), [this](boost::system::error_code err, std::size_t size)
 	{
 		if (!err)
@@ -107,6 +108,7 @@ void Session::do_read_header()
 
 			if (_readMsg.get_extra_header_size() > 0)
 			{
+				_readMsg.checkResize(Message::HEADER_LENGTH + _readMsg.get_extra_header_size());
 				boost::asio::async_read(_socket, boost::asio::buffer(_readMsg.data() + Message::HEADER_LENGTH, _readMsg.get_extra_header_size()), [this](boost::system::error_code err, std::size_t size)
 				{
 					if (!err)
@@ -136,6 +138,7 @@ void Session::do_read_header()
 
 void Session::do_read_mask()
 {
+	_readMsg.checkResize(_readMsg.masking() - _readMsg.data() + 1 + Message::MASKING_LENGTH);
 	boost::asio::async_read(_socket, boost::asio::buffer(_readMsg.masking(), Message::MASKING_LENGTH), [this](boost::system::error_code err, size_t size)
 	{
 		if (!err)
@@ -152,6 +155,7 @@ void Session::do_read_mask()
 
 void Session::do_read_body()
 {
+	_readMsg.checkResize(_readMsg.body() - _readMsg.data() + 1 + _readMsg.get_body_size());
 	boost::asio::async_read(_socket, boost::asio::buffer(_readMsg.body(), _readMsg.get_body_size()), [this](boost::system::error_code err, size_t size)
 	{
 		if (!err)
@@ -177,6 +181,7 @@ void Session::diliver(const std::string & msg)
 	}
 	_writeMsg.set_body_size(msg.size());
 	_writeMsg.encode_header();
+	_writeMsg.checkResize(_writeMsg.body() - _writeMsg.data() + 1 + _writeMsg.get_data_size());
 	memcpy(_writeMsg.body(), msg.c_str(), msg.size());
 	boost::asio::async_write(_socket, boost::asio::buffer(_writeMsg.data(), _writeMsg.get_data_size()), [this](boost::system::error_code err, size_t size)
 	{

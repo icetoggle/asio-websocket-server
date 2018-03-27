@@ -8,7 +8,8 @@ public:
 	enum
 	{
 		HEADER_LENGTH = 2,
-		MAX_BODY_LENGTH = 0xffff,
+		INIT_BODY_SIZE = 32,
+		MAX_BODY_LENGTH = 0xffff + 1,
 		MASKING_LENGTH = 4,
 	};
 
@@ -45,8 +46,16 @@ public:
 
 	void encode(const std::string &data);
 
+	void checkResize(size_t size);
+
+	size_t capacity()
+	{
+		return _capacity;
+	}
+
 private:
-	unsigned char _datas[HEADER_LENGTH + MAX_BODY_LENGTH + MASKING_LENGTH  + 1];
+	unsigned char *_datas;
+	size_t _capacity;
 	unsigned long long _bodyLength;
 	unsigned long long _extra_header_length;
 };

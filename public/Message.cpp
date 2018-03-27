@@ -6,6 +6,8 @@
 
 Message::Message():_extra_header_length(0)
 {
+	_datas = (unsigned char *)malloc(sizeof(unsigned char) * (HEADER_LENGTH + INIT_BODY_SIZE + MASKING_LENGTH));
+	_capacity = HEADER_LENGTH + INIT_BODY_SIZE + MASKING_LENGTH;
 }
 
 
@@ -130,5 +132,18 @@ void Message::encode(const std::string &data)
 	_bodyLength = data.size();
 	encode_header();
 	memcpy(_datas + HEADER_LENGTH, data.c_str(), data.size());
+}
+
+void Message::checkResize(size_t size)
+{
+	if (size <= _capacity)
+	{
+		return;
+	}
+
+	while (_capacity < size) {
+		_capacity = (_capacity << 1);
+	}
+	_datas = (unsigned char *)realloc(_datas, (sizeof(unsigned char) * (_capacity)));
 }
 
